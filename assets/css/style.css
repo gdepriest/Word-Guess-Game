@@ -62,14 +62,16 @@ h4 {
     padding-bottom: 10px;
     border-bottom: 8px dotted whitesmoke;
 }
-#lives {
-    text-align: center;
+/* #lives {
+    align-content: center;
     font-size: 30px;
-}
+} */
 
 #currentWord {
     padding-top: 10px;
 }
+
+
 
 
 /* .Site {
