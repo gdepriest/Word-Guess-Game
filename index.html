@@ -19,15 +19,32 @@
         </section>
     </header>
     
-    <section class="container site-content">
+    <section class="container content">
         <section class="column1">
-            <h4>Press any letter to begin!</h4>                       
-            <p>Current Word | </p>
-            <p id="currentWord"><span id="answerArray"></span></p>
+
+            <h4>Press any letter to begin!</h4> 
+
+            <p>Current Word</p>
+
+            <p id="currentWord"></p>
+
             <hr>
-            <p id="lives">Lives |<span id="lives"></span></p>
-            <p id="guessedLetters">Guessed Letters | </p>
-            <p>Wins | <span id="wins"></span></p>
+            <div class="row">
+                Lives : <span id="lives"></span>
+            </div>
+
+            <div class="row">
+                Guessed Letters : <span id="guessedLetters"></span>
+            </div>
+
+            <div class="row">
+                Wins : <span id="wins"></span>
+            </div>
+
+            <div class="row">
+                Losses : <span id="losses"></span>
+            </div>
+
         </section>
         <section class="column2"></section>
     </section>

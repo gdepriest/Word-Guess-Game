@@ -1,36 +1,133 @@
-// Create an array from which the computer will choose - list of National Parks
-var options = ["grand canyon", "yosemite", "zion", "isle royale", "mesa verde", "glacier bay", 
+// Global Variables - options array, park, userguess, wins, loss, guessedLetters, lives
+var wordOptions = ["grand canyon", "yosemite", "zion", "isle royale", "mesa verde", "glacier bay", 
 "sequoia", "glacier", "arches", "grand teton", "badlands", "joshua tree", "rocky mountain", 
 "bryce canyon", "yellowstone", "great sand dunes", "death valley", "mammoth cave"];
 
-// Make the computer choose from that array.
+var selectedWord= "";
+var lettersInWord = [];
+var numBlanks = 0;
+var blanksAndSuccesses = [];
+var wrongLetters = [];
 
-// Global Variables - options array, park, userguess, wins, loss, guessedLetters, lives
+var winCount = 0;
+var lossCount = 0;
+var guessesLeft = 9;
 
 
-var answerArray = [];
+//Functions 
 
-var userguess = [];
+function startGame () {
 
-var lives = 12;
+    selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+    lettersInWord = selectedWord.split("");
+    numBlanks = lettersInWord.length;
 
-var wins = 0;
+    //reset
+    guessesLeft = 9;
+    wrongLetters = [];
+    blanksAndSuccesses = [];
 
-var guessedLetters = [];
-
-var currentWord = document.getElementById("currentWord");
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-    var computerGuess = options[Math.floor(Math.random() * options.length)];
-    console.log(computerGuess);
-    for (var i = 0; i < computerGuess.length; i++) {
-        answerArray[i] = "_";
-        console.log(answerArray);
-        currentWord.textContent = answerArray;
+    for (var i=0; i<numBlanks; i++) {
+        blanksAndSuccesses.push("_");
     }
-});
 
-// document.onkeyup = function(event) {
+    document.getElementById("currentWord").innerHTML = blanksAndSuccesses.join(" ");
+    document.getElementById("lives").innerHTML = guessesLeft;
+    document.getElementById("wins").innerHTML = winCount;
+    document.getElementById("losses").innerHTML = lossCount;
+
+    //testing
+    console.log(selectedWord);
+    console.log(lettersInWord);
+    console.log(numBlanks);
+    console.log(blanksAndSuccesses);
+}
+
+function checkLetters(letter) {
+
+    var isLetterInWord = false;
+
+    for (var i=0; i<numBlanks; i++) {
+        if (selectedWord[i] == letter) {
+            isLetterInWord = true;
+        }
+    }
+
+    if (isLetterInWord) {
+        for (var i=0; i<numBlanks; i++) {
+            if (selectedWord[i] == letter) {
+                blanksAndSuccesses[i] = letter;
+            }
+        }
+    }else {
+        wrongLetters.push(letter);
+        guessesLeft--;
+    }
+
+    console.log(blanksAndSuccesses);
+}
+
+function roundComplete() {
+
+    console.log("Wins: " + winCount + " | Losses: " + lossCount + " | Guesses Left: " + guessesLeft)
+
+    document.getElementById("lives").innerHTML = guessesLeft;
+    document.getElementById("currentWord").innerHTML = blanksAndSuccesses.join(" ");
+    document.getElementById("guessedLetters").innerHTML = wrongLetters.join(" ");
+
+    if (lettersInWord.toString()===blanksAndSuccesses.toString()) {
+        winCount++;
+        alert("You Won!");
+        document.getElementById("wins").innerHTML = winCount;
+        startGame();
+    } else if (guessesLeft===0) {
+        lossCount++;
+        alert("You Lost!");
+        document.getElementById("losses").innerHTML = lossCount;
+        startGame();
+    }
+}
+
+//Main Process
+
+startGame();
+
+document.onkeyup = function(event) {
+    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    // console.log(letterGuessed);
+    checkLetters(letterGuessed);
+    roundComplete();
+}
+
+
+
+// var answerArray = [];
+
+// var userguess = [];
+
+// var lives = 12;
+
+// var wins = 0;
+
+// var guessedLetters = [];
+
+// var currentWord = document.getElementById("currentWord");
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function(event) { 
+//     var computerGuess = options[Math.floor(Math.random() * options.length)];
+//     console.log(computerGuess);
+//     for (var i = 0; i < computerGuess.length; i++) {
+//         answerArray[i] = "_";
+//         console.log(answerArray);
+//         currentWord.textContent = answerArray;
+//     }
+// });
+
+// // document.onkeyup = function(event) {
     
 
 //     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
