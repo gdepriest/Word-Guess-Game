@@ -27,8 +27,12 @@ function startGame () {
     wrongLetters = [];
     blanksAndSuccesses = [];
 
-    for (var i=0; i<numBlanks; i++) {
-        blanksAndSuccesses.push("_");
+    for (var i=0; i<numBlanks; i++) { 
+        if (lettersInWord[i] == " ") {
+            blanksAndSuccesses.push("*");
+          } else {
+            blanksAndSuccesses.push("_");
+          }       
     }
 
     document.getElementById("currentWord").innerHTML = blanksAndSuccesses.join(" ");
@@ -75,7 +79,7 @@ function roundComplete() {
     document.getElementById("currentWord").innerHTML = blanksAndSuccesses.join(" ");
     document.getElementById("guessedLetters").innerHTML = wrongLetters.join(" ");
 
-    if (lettersInWord.toString()===blanksAndSuccesses.toString()) {
+    if (lettersInWord.toString()===blanksAndSuccesses.toString().replace("*", " ")) {
         winCount++;
         alert("You Won!");
         document.getElementById("wins").innerHTML = winCount;
