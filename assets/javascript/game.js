@@ -18,7 +18,7 @@ var guessesLeft = 9;
 
 function startGame () {
 
-    selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+    selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)].toUpperCase();
     lettersInWord = selectedWord.split("");
     numBlanks = lettersInWord.length;
 
@@ -97,7 +97,7 @@ function roundComplete() {
 startGame();
 
 document.onkeyup = function(event) {
-    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    var letterGuessed = String.fromCharCode(event.keyCode).toUpperCase();
     // console.log(letterGuessed);
     checkLetters(letterGuessed);
     roundComplete();
