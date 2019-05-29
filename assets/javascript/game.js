@@ -86,7 +86,7 @@ function roundComplete() {
         startGame();
     } else if (guessesLeft===0) {
         lossCount++;
-        alert("You Lost!");
+        alert("You Lost! The correct answer was " + selectedWord.toUpperCase() + "!");
         document.getElementById("losses").innerHTML = lossCount;
         startGame();
     }
